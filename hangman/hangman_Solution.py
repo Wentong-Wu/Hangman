@@ -3,8 +3,6 @@ Make sure you complete all the TODOs in this file.
 The prints have to contain the same text as indicated, don't add any more prints,
 or you will get 0 for this assignment.
 '''
-from crypt import methods
-from ctypes.wintypes import CHAR
 import random
 
 class Hangman:
@@ -43,6 +41,14 @@ class Hangman:
         Asks the user for a letter.
     '''
     def __init__(self, word_list, num_lives=5):
+
+        # TODO 2 Complete: Gets a random word from the list and displays how many letters is in the word
+        self.word = random.choice(word_list)
+        print("The mystery word has",len(self.word), "characters")
+        self.word_guessed = list('_' * len(self.word))
+        print(self.word_guessed)
+        self.list_letters = []
+
         # TODO 2: Initialize the attributes as indicated in the docstring
         # TODO 2: Print two message upon initialization:
         # 1. "The mystery word has {len(self.word)} characters" (The number of letters is NOT the UNIQUE number of letters)
@@ -76,15 +82,19 @@ class Hangman:
         If it passes both checks, it calls the check_letter method.
         '''
         
-        Userinput = input("Enter a letter: ")
-        while not type(Userinput) is CHAR:
-            print("Not a valid letter")
-            Userinput = input("Enter a letter: ")
-        
-        
-        # TODO 1: Ask the user for a letter iteratively until the user enters a valid letter
-        # TODO 1: Assign the letter to a variable called `letter`
-        # TODO 1: The letter has to comply with the following criteria: It has to be a single character. If it is not, print "Please, enter just one character"
+        # TODO Complete 1: Asking for a single character input
+        while True:
+            try:
+                self.letter = input("Enter a letter: ")
+                if len(self.letter) != 1:
+                    print("Please, enter just one character")
+                if self.letter in self.list_letters:
+                    print(self.letter,"was already tried")
+                else:
+                    self.list_letters.append(self.letter)
+            except:
+                print("An exception occured")
+
         # TODO 2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
         # TODO 3: If the letter is valid, call the check_letter method
         pass
@@ -92,7 +102,7 @@ class Hangman:
 def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
-    # TODO 1: To test this task, you can call the ask_letter method
+    game.ask_letter() # TODO Complete 1: Testing the method
     # TODO 2: To test this task, upon initialization, two messages should be printed 
     # TODO 3: To test this task, you call the ask_letter method and check if the letter is in the word
     
