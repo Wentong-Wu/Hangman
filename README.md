@@ -1,4 +1,4 @@
-# Example Project Documentation Guideline
+# Hangman Project Documentation Guideline
 
 > Include here a brief description of the project, what technologies are used etc.
 
