@@ -2,7 +2,7 @@
 
 > Created hangman game on Visual Studio Code using Python programming language
 
-## Milestone 1
+## Milestone 1 - Initializing the class and creating ask_letter method
 
 - Answer some of these questions in the next few bullet points. What have you built? What technologies have you used? Why have you used those?
 
