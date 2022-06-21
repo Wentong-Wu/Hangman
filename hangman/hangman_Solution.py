@@ -12,7 +12,6 @@ class Hangman:
     A Hangman Game that asks the user for a letter and checks if it is in the word.
     It starts with a default number of lives and a random word from the word_list.
 
-    
     Parameters:
     ----------
     word_list: list
@@ -51,6 +50,14 @@ class Hangman:
         self.list_letters = []
         self.num_lives = num_lives
         self.num_letters = len(Counter(self.word).keys()) # Gets the number of unique letter in the word by using 'key' method
+        
+        '''
+        # A variable that stores all the correct letters in the word
+        self.correct_letters = []
+        for char in self.word:
+            if char not in self.correct_letters:
+                self.correct_letters.append(char)
+        '''
         pass
 
     def check_letter(self, letter) -> None:
@@ -82,6 +89,8 @@ class Hangman:
         else:     
             print("Sorry,",self.letter, "is not in the word. :( ")
             self.num_lives -= 1 #Reduces live by 1 when letter is not in word
+            #self.random_letter = random.choice(self.correct_letters) #Choose a random letter from the correct letter
+            #self.check_letter(self.random_letter) #Checks to see if the random letter 
             print("You have",self.num_lives, "lives left!")
         pass
 
@@ -92,16 +101,16 @@ class Hangman:
         2. If the character is a single character
         If it passes both checks, it calls the check_letter method.
         '''
-        
         #Asking for a single character input
         while True:
             try:
                 self.letter = input("Enter a letter: ").lower()
-                if len(self.letter) == 1:             
+                if len(self.letter) == 1:
                     if self.letter in self.list_letters: #Check to see if the same letter has entered.
                         print(self.letter,"was already tried")
                     else:
                         self.list_letters.append(self.letter)
+                        #self.correct_letters.remove(self.letter) # Removes the letter from the correct letter
                         self.check_letter(self.letter) #Letter valid calls check_letter
                         if self.num_letters == 0: # Win condition
                             print("Congratulations, you won!")
@@ -110,7 +119,7 @@ class Hangman:
                             print("You ran out of lives. The word was",self.word)
                             break
                 else:
-                    print("Please, enter just one character")  
+                    print("Please, enter just one character")
             except:
                 print("An exception occured")
         pass
