@@ -43,21 +43,13 @@ class Hangman:
     '''
     def __init__(self, word_list, num_lives=5):
 
-        self.word = random.choice(word_list) #Gets a random word from the word_list
-        print("The mystery word has",len(self.word), "characters") #Telling user how many letters in the word
-        self.word_guessed = list('_' * len(self.word)) #Displaying the hidden letters in the word
+        self.word = random.choice(word_list) # Gets a random word from the word_list
+        print("The mystery word has",len(self.word), "characters") # Telling user how many letters in the word
+        self.word_guessed = list('_' * len(self.word)) # Displaying the hidden letters in the word
         print(self.word_guessed)
         self.list_letters = []
         self.num_lives = num_lives
         self.num_letters = len(Counter(self.word).keys()) # Gets the number of unique letter in the word by using 'key' method
-        
-        '''
-        # A variable that stores all the correct letters in the word
-        self.correct_letters = []
-        for char in self.word:
-            if char not in self.correct_letters:
-                self.correct_letters.append(char)
-        '''
         pass
 
     def check_letter(self, letter) -> None:
@@ -73,12 +65,10 @@ class Hangman:
 
         '''
 
-        # Is there a easier and better way of doing this?
-
         if self.letter in self.word: # Checks the letter to see if it contains in the word
             dupe_letter_count = self.word.count(self.letter) #Checks for the total number of letter is in the word
             self.letter_index=0
-            for x in range(dupe_letter_count): #loop around and setting the display of the letters.
+            for x in range(dupe_letter_count): # Loop around and setting the display of the letters.
                 self.letter_index = self.word.find(self.letter, self.letter_index)
                 self.word_guessed[self.letter_index] = self.letter # Replace the '_' with the letter
                 self.letter_index+=1 
@@ -88,9 +78,7 @@ class Hangman:
                 self.num_letters -= 1 # Reduce the unique letter by 1
         else:     
             print("Sorry,",self.letter, "is not in the word. :( ")
-            self.num_lives -= 1 #Reduces live by 1 when letter is not in word
-            #self.random_letter = random.choice(self.correct_letters) #Choose a random letter from the correct letter
-            #self.check_letter(self.random_letter) #Checks to see if the random letter 
+            self.num_lives -= 1 # Reduces live by 1 when letter is not in word
             print("You have",self.num_lives, "lives left!")
         pass
 
@@ -101,32 +89,84 @@ class Hangman:
         2. If the character is a single character
         If it passes both checks, it calls the check_letter method.
         '''
-        #Asking for a single character input
+        # Asking for a single character input
         while True:
             try:
                 self.letter = input("Enter a letter: ").lower()
                 if len(self.letter) == 1:
-                    if self.letter in self.list_letters: #Check to see if the same letter has entered.
+                    if self.letter in self.list_letters: # Check to see if the same letter has entered.
                         print(self.letter,"was already tried")
+                        print(self.draw_hangman(self.num_lives))
                     else:
                         self.list_letters.append(self.letter)
-                        #self.correct_letters.remove(self.letter) # Removes the letter from the correct letter
-                        self.check_letter(self.letter) #Letter valid calls check_letter
+                        self.check_letter(self.letter) # Letter valid calls check_letter
+                        print(self.draw_hangman(self.num_lives))
                         if self.num_letters == 0: # Win condition
                             print("Congratulations, you won!")
                             break
                         if self.num_lives == 0: # Lose condition
                             print("You ran out of lives. The word was",self.word)
                             break
+                    
                 else:
                     print("Please, enter just one character")
             except:
                 print("An exception occured")
         pass
 
+    def draw_hangman(self, num_life): # Displaying the hangman
+        
+        stages = [ """
+                ---------
+                |       |
+                |       0
+                |      \\|/
+                |       |
+                |      / \\
+        ""","""
+                ---------
+                |       |
+                |       0
+                |      \\|/
+                |       |
+                |      /
+        ""","""
+                ---------
+                |       |
+                |       0
+                |      \\|/
+                |       |
+                |      
+        ""","""
+                ---------
+                |       |
+                |       0
+                |      \\|
+                |       |
+                |      
+        ""","""
+                ---------
+                |       |
+                |       0
+                |      
+                |       
+                |      
+        ""","""
+                ---------
+                |       |
+                |       
+                |      
+                |       
+                |      
+        """
+        ]
+        return stages[num_life]
+        pass
+
 def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
+    print(game.draw_hangman(num_life=5))
     game.ask_letter() # Testing the method
     pass
 
