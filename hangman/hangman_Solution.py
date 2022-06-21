@@ -78,14 +78,11 @@ class Hangman:
             else:
                 print("Nice!",self.letter,"is in the word!")
                 print(self.word_guessed)
-                self.num_letters -= 1
+                self.num_letters -= 1 # Reduce the unique letter by 1
         else:     
             print("Sorry,",self.letter, "is not in the word. :( ")
             self.num_lives -= 1 #Reduces live by 1 when letter is not in word
             print("You have",self.num_lives, "lives left!")
-
-        # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
-
         pass
 
     def ask_letter(self):
@@ -98,21 +95,24 @@ class Hangman:
         
         #Asking for a single character input
         while True:
-            self.letter = input("Enter a letter: ").lower()
-            if len(self.letter) == 1:             
-                if self.letter in self.list_letters: #Check to see if the same letter has entered.
-                    print(self.letter,"was already tried")
+            try:
+                self.letter = input("Enter a letter: ").lower()
+                if len(self.letter) == 1:             
+                    if self.letter in self.list_letters: #Check to see if the same letter has entered.
+                        print(self.letter,"was already tried")
+                    else:
+                        self.list_letters.append(self.letter)
+                        self.check_letter(self.letter) #Letter valid calls check_letter
+                        if self.num_letters == 0: # Win condition
+                            print("Congratulations, you won!")
+                            break
+                        if self.num_lives == 0: # Lose condition
+                            print("You ran out of lives. The word was",self.word)
+                            break
                 else:
-                    self.list_letters.append(self.letter)
-                    self.check_letter(self.letter) #Letter valid calls check_letter
-                    if self.num_letters == 0: # Win condition
-                        print("Congratulations, you won!")
-                        break
-                    if self.num_lives == 0: # Lose condition
-                        print("You ran out of lives. The word was",self.word)
-                        break
-            else:
-                print("Please, enter just one character") 
+                    print("Please, enter just one character")  
+            except:
+                print("An exception occured")
         pass
 
 def play_game(word_list):
