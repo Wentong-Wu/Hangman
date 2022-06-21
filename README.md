@@ -2,7 +2,7 @@
 
 > Created hangman game on Visual Studio Code using Python programming language
 
-## Milestone 1 - Initializing the class and creating ask_letter method
+## Milestone 1 - User Input - Ask_letter method
 
 - Answer some of these questions in the next few bullet points. What have you built? What technologies have you used? Why have you used those?
 
@@ -14,7 +14,7 @@
 
 > Insert an image/screenshot of what you have built so far here.
 
-## Milestone 2
+## Milestone 2 - Defining the initializer
 
 - Does what you have built in this milestone connect to the previous one? If so explain how. What technologies are used? Why have you used them? Have you run any commands in the terminal? If so insert them using backticks (To get syntax highlighting for code snippets add the language after the first backticks).
 
@@ -32,7 +32,7 @@
 
 > Insert screenshot of what you have built working.
 
-## Milestone n
+## Milestone 3 - Check_letter and ask_letter methods
 
 - Continue this process for every milestone, making sure to display clear understanding of each task and the concepts behind them as well as understanding of the technologies used.
 
