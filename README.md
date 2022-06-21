@@ -1,6 +1,6 @@
 # Hangman Project Documentation Guideline
 
-> Include here a brief description of the project, what technologies are used etc.
+> Created hangman game on Visual Studio Code using Python programming language
 
 ## Milestone 1
 
