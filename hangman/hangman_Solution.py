@@ -5,6 +5,7 @@ or you will get 0 for this assignment.
 '''
 import random
 from site import check_enableusersite
+from typing import Counter
 
 class Hangman:
     '''
@@ -49,7 +50,7 @@ class Hangman:
         print(self.word_guessed)
         self.list_letters = []
         self.num_lives = num_lives
-        self.num_letters = 0
+        self.num_letters = len(Counter(self.word).keys()) # Gets the number of unique letter in the word by using 'key' method
         pass
 
     def check_letter(self, letter) -> None:
@@ -77,7 +78,8 @@ class Hangman:
             else:
                 print("Nice!",self.letter,"is in the word!")
                 print(self.word_guessed)
-        else:
+                self.num_letters -= 1
+        else:     
             print("Sorry,",self.letter, "is not in the word. :( ")
             self.num_lives -= 1 #Reduces live by 1 when letter is not in word
             print("You have",self.num_lives, "lives left!")
@@ -96,30 +98,27 @@ class Hangman:
         
         #Asking for a single character input
         while True:
-            try:
-                self.letter = input("Enter a letter: ").lower()
-                if len(self.letter) == 1:             
-                    if self.letter in self.list_letters: #Check to see if the same letter has entered.
-                        print(self.letter,"was already tried")
-                    else:
-                        self.list_letters.append(self.letter)
-                        self.check_letter(self.letter) #Letter valid calls check_letter
+            self.letter = input("Enter a letter: ").lower()
+            if len(self.letter) == 1:             
+                if self.letter in self.list_letters: #Check to see if the same letter has entered.
+                    print(self.letter,"was already tried")
                 else:
-                    print("Please, enter just one character")            
-            except:
-                print("An exception occured")
+                    self.list_letters.append(self.letter)
+                    self.check_letter(self.letter) #Letter valid calls check_letter
+                    if self.num_letters == 0: # Win condition
+                        print("Congratulations, you won!")
+                        break
+                    if self.num_lives == 0: # Lose condition
+                        print("You ran out of lives. The word was",self.word)
+                        break
+            else:
+                print("Please, enter just one character") 
         pass
 
 def play_game(word_list):
     # As an aid, part of the code is already provided:
     game = Hangman(word_list, num_lives=5)
     game.ask_letter() # Testing the method
-    
-    
-    # TODO 4: Iteratively ask the user for a letter until the user guesses the word or runs out of lives
-    # If the user guesses the word, print "Congratulations, you won!"
-    # If the user runs out of lives, print "You ran out of lives. The word was {word}"
-
     pass
 
 if __name__ == '__main__':
