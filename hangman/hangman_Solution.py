@@ -80,6 +80,7 @@ class Hangman:
             print("Sorry,",self.letter, "is not in the word. :( ")
             self.num_lives -= 1 # Reduces live by 1 when letter is not in word
             print("You have",self.num_lives, "lives left!")
+            print(self.word_guessed)
         pass
 
     def ask_letter(self):
@@ -93,10 +94,11 @@ class Hangman:
         while True:
             try:
                 self.letter = input("Enter a letter: ").lower()
-                if len(self.letter) == 1:
+                if len(self.letter) == 1 and self.letter.isalpha() == True:
                     if self.letter in self.list_letters: # Check to see if the same letter has entered.
                         print(self.letter,"was already tried")
-                        print(self.draw_hangman(self.num_lives))
+                        print(self.word_guessed)
+                        print(self.draw_hangman(self.num_lives))           
                     else:
                         self.list_letters.append(self.letter)
                         self.check_letter(self.letter) # Letter valid calls check_letter
@@ -107,9 +109,13 @@ class Hangman:
                         if self.num_lives == 0: # Lose condition
                             print("You ran out of lives. The word was",self.word)
                             break
-                    
-                else:
-                    print("Please, enter just one character")
+                else:            
+                    if self.letter.isalpha() == False:
+                        print("Please enter an alphabet letter")
+                    else:
+                        print("Please, enter just one character")
+                    print(self.word_guessed)
+                    print(self.draw_hangman(self.num_lives))
             except:
                 print("An exception occured")
         pass
