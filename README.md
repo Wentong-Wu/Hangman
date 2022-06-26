@@ -5,8 +5,8 @@
 ## Milestone 1 - User Input - Ask_letter method
 
 - Answer some of these questions in the next few bullet points. What have you built? What technologies have you used? Why have you used those?
-- Used Object-Oriented Programing 
-  
+- Built a method which asks the user for its input making sure the input is correctly entered before calling another function. All the methods can only be called if the hangman class is created to ensure that the user is intended to play the hangman game (Object-Oriented Programming)
+
 ```python
 
     def ask_letter(self):
