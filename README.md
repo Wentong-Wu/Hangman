@@ -8,7 +8,7 @@
 - Used Object-Oriented Programing 
   
 ```python
-"""
+
     def ask_letter(self):
         '''
         Asks the user for a letter and checks two things:
@@ -44,7 +44,7 @@
                     print(self.draw_hangman(self.num_lives))
             except:
                 print("An exception occured")
-        pass"""
+        pass
 ```
 
 > Insert an image/screenshot of what you have built so far here.
