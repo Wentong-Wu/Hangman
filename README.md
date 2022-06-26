@@ -5,11 +5,46 @@
 ## Milestone 1 - User Input - Ask_letter method
 
 - Answer some of these questions in the next few bullet points. What have you built? What technologies have you used? Why have you used those?
-
-- Example: The FastAPI framework allows for fast and easy construction of APIs and is combined with pydantic, which is used to assert the data types of all incoming data to allow for easier processing later on. The server is ran locally using uvicorn, a library for ASGI server implementation.
+- Used Object-Oriented Programing 
   
 ```python
-"""Insert your code here"""
+"""
+    def ask_letter(self):
+        '''
+        Asks the user for a letter and checks two things:
+        1. If the letter has already been tried
+        2. If the character is a single character
+        If it passes both checks, it calls the check_letter method.
+        '''
+        # Asking for a single character input
+        while True:
+            try:
+                self.letter = input("Enter a letter: ").lower()
+                if len(self.letter) == 1 and self.letter.isalpha() == True:
+                    if self.letter in self.list_letters: # Check to see if the same letter has entered.
+                        print(self.letter,"was already tried")
+                        print(self.word_guessed)
+                        print(self.draw_hangman(self.num_lives))           
+                    else:
+                        self.list_letters.append(self.letter)
+                        self.check_letter(self.letter) # Letter valid calls check_letter
+                        print(self.draw_hangman(self.num_lives))
+                        if self.num_letters == 0: # Win condition
+                            print("Congratulations, you won!")
+                            break
+                        if self.num_lives == 0: # Lose condition
+                            print("You ran out of lives. The word was",self.word)
+                            break
+                else:            
+                    if self.letter.isalpha() == False:
+                        print("Please enter an alphabet letter")
+                    else:
+                        print("Please, enter just one character")
+                    print(self.word_guessed)
+                    print(self.draw_hangman(self.num_lives))
+            except:
+                print("An exception occured")
+        pass"""
 ```
 
 > Insert an image/screenshot of what you have built so far here.
